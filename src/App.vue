@@ -28,7 +28,7 @@
         <a-asset-item id="tree-obj" src="/obj/evident-shield.obj"></a-asset-item>
         <a-asset-item id="tree-mtl" src="/obj/evident-shield.mtl"></a-asset-item>
       </a-assets>
-      <!-- <a-entity id='shield' position="0 2 -3" obj-model="obj: #tree-obj; mtl: #tree-mtl"></a-entity> -->
+      <a-entity id='shield' position="0 2 -4" obj-model="obj: #tree-obj; mtl: #tree-mtl"></a-entity>
       <!-- <a-entity id='shield' position="0 2 -3" obj-model="obj: #tree-obj;" material="color: #3366ff; roughness: 1; metalness: 0"></a-entity> -->
       <!-- <a-entity id='shield' position="0 2 -3" obj-model="obj: #tree-obj;" material="shader: custom-material"></a-entity> -->
 
