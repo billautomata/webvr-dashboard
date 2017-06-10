@@ -31,13 +31,15 @@
       <a-entity id='shield' position="0 2 -4" obj-model="obj: #tree-obj; mtl: #tree-mtl"></a-entity>
       <!-- <a-entity id='shield' position="0 2 -3" obj-model="obj: #tree-obj;" material="color: #3366ff; roughness: 1; metalness: 0"></a-entity> -->
       <!-- <a-entity id='shield' position="0 2 -3" obj-model="obj: #tree-obj;" material="shader: custom-material"></a-entity> -->
-
+      <a-ocean color='purple' depth="100" width="100"></a-ocean>
+      <!-- <a-light type="ambient" color="#ccc"></a-light> -->
+      <!-- <a-light color="#ddf" distance="100" intensity="0.4" type="point"></a-light> -->
+      <a-light color="#ddf" position="3 20 3" distance="50" intensity="1" type="point"></a-light>
     </a-scene>
   </div>
 </template>
 
 <script>
-var aframe = require('aframe')
 import stat from './components/stat.vue'
 
 export default {
@@ -55,7 +57,7 @@ export default {
   beforeCreate () {
   },
   mounted () {
-    console.log(aframe)
+    console.log(AFRAME)
     var self = this
 
     // stats

@@ -23,6 +23,7 @@
   },
   "dependencies": {
     "aframe": "^0.5.0",
+    "aframe-extras": "^3.8.3",
     "vue": "^2.0.1"
   },
   "devDependencies": {
