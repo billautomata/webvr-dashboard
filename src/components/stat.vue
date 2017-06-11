@@ -4,10 +4,10 @@
     <a-text font='roboto' align='center' scale='2 2 0' position='0 0.25 0' color='#000000' :value="value"></a-text>
     <!-- <a-entity id='foo' geometry="primitive: box" material="color: red"></a-entity> -->
     <a-entity position='-0.25 -0.25 0' scale='1 0.2 0.2'>
-      <a-box geometry="primitive: box" :width='widths[0]' :position="[box_offsets[0], 0, 0].join(' ')" material="color: red; wireframe: false"></a-box>
-      <a-box geometry="primitive: box" :width='widths[1]' :position="[box_offsets[1] - widths[1] * 0.5, 0, 0].join(' ')" material="color: orange; wireframe: false"></a-box>
-      <a-box geometry="primitive: box" :width='widths[2]' :position="[box_offsets[2] - widths[2] * 0.5, 0, 0].join(' ')" material="color: yellow; wireframe: false"></a-box>
-      <a-box geometry="primitive: box" :width='widths[3]' :position="[box_offsets[3] - widths[3] * 0.5, 0, 0].join(' ')" material="color: blue; wireframe: false"></a-box>
+      <a-box shadow geometry="primitive: box" :width='widths[0]' :position="[box_offsets[0], 0, 0].join(' ')" material="color: red; wireframe: false"></a-box>
+      <a-box shadow geometry="primitive: box" :width='widths[1]' :position="[box_offsets[1] - widths[1] * 0.5, 0, 0].join(' ')" material="color: orange; wireframe: false"></a-box>
+      <a-box shadow geometry="primitive: box" :width='widths[2]' :position="[box_offsets[2] - widths[2] * 0.5, 0, 0].join(' ')" material="color: yellow; wireframe: false"></a-box>
+      <a-box shadow geometry="primitive: box" :width='widths[3]' :position="[box_offsets[3] - widths[3] * 0.5, 0, 0].join(' ')" material="color: blue; wireframe: false"></a-box>
     </a-entity>
   </a-entity>
 </template>
