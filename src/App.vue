@@ -5,19 +5,51 @@
         <a-box :position="pos(index)" rotation="0 45 0" color="#4CC3D9"></a-box>
       </template> -->
 
-      <a-entity position='0 1.5 -3'>
-        <template v-for="(stat,index) in stats">
-          <a-entity :rotation="[0, 0, 0].join(' ')" :position="[index*1.1, 0, 0].join(' ')">
+      <a-entity position='1.7 1.5 -4'>
+        <template v-for="(stat,index) in region_stats">
+          <a-entity :rotation="[0, 0, 0].join(' ')" :position="[index*1.1, 0, 0].join(' ')"  scale='0 0 0'>
             <stat v-bind:label='stat.label'
               v-bind:value='stat.value'
-              v-bind:stat_high='2'
-              v-bind:stat_medium='1'
-              v-bind:stat_low='1'
-              v-bind:stat_pass='1'></stat>
+              v-bind:stat_high='stat.stat_high'
+              v-bind:stat_medium='stat.stat_medium'
+              v-bind:stat_low='stat.stat_low'
+              v-bind:stat_pass='stat.stat_pass'></stat>
+              <a-animation attribute="scale"
+                           :dur="1000 + (index*150)"
+                           fill="forwards"
+                           to="1 1 1"
+                           repeat="0"></a-animation>
           </a-entity>
         </template>
-        <!-- <stat label='us-west-2' value='128' stat_high='2' stat_medium='1' stat_low='1' stat_pass='1'></stat> -->
       </a-entity>
+
+      <a-entity position='-5 1.5 -4'>
+        <template v-for="(stat,index) in services_stats">
+          <a-entity :rotation="[0, 0, 0].join(' ')" :position="[index*1.1, 0, 0].join(' ')" scale='0 0 0'>
+            <stat v-bind:label='stat.label'
+              v-bind:value='stat.value'
+              v-bind:stat_high='stat.stat_high'
+              v-bind:stat_medium='stat.stat_medium'
+              v-bind:stat_low='stat.stat_low'
+              v-bind:stat_pass='stat.stat_pass'></stat>
+              <a-animation attribute="scale"
+                           :dur="1000 + (index*150)"
+                           fill="forwards"
+                           to="1 1 1"
+                           repeat="0"></a-animation>
+          </a-entity>
+        </template>
+      </a-entity>
+
+      <a-entity geometry='primitive: sphere; segmentsWidth: 32; segmentsHeight: 32; radius: 9;' position='0 0 -15' scale='1 1 1' rotation='30 0 0' material="src: url(/texture/earth.jpg); wireframe: false;">
+        <a-animation attribute="rotation"
+                     dur='100000'
+                     fill="none"
+                     to="30 360 0"
+                     repeat="indefinite"
+                     easing='linear'></a-animation>
+      </a-entity>
+
       <!-- <a-sphere position="0 1.25 -5" radius="1.25" color="#EF2D5E"></a-sphere>
       <a-cylinder position="1 0.75 -3" radius="0.5" height="1.5" color="#FFC65D"></a-cylinder>
       <a-plane position="0 0 -4" rotation="-90 0 0" width="4" height="4" color="#7BC8A4"></a-plane>
@@ -38,7 +70,15 @@
         <a-asset-item id="sphere-env-obj" src="/obj/spherenvironment.obj"></a-asset-item>
         <a-asset-item id="sphere-env-mtl" src="/obj/spherenvironment.mtl"></a-asset-item>
       </a-assets>
-      <a-entity id='shield' shadow="cast: true; receive: true" position="-2 2 -4" obj-model="obj: #tree-obj; mtl: #tree-mtl"></a-entity>
+      <a-entity id='shield' shadow="cast: true; receive: true" position="0 2 -4" scale='0 0 0' obj-model="obj: #tree-obj; mtl: #tree-mtl">
+        <a-animation attribute="scale"
+                     dur='1000'
+                     fill="forwards"
+                     to="1 1 1"
+                     repeat="0"
+                     easing='ease-out'></a-animation>
+      </a-entity>
+
       <!-- <a-entity id='shield' position="0 2 -8" obj-model="obj: #tree-obj; mtl: #tree-mtl"></a-entity> -->
 
       <!-- <a-entity id='vr-environment' position="0 -2 0" obj-model="obj: #vr-environment-obj; mtl: #vr-environment-mtl;" shadow="cast: true; receive: true"></a-entity> -->
@@ -73,7 +113,9 @@ export default {
     return {
       foo: '1',
       cubes: [],
-      stats: []
+      region_stats: [],
+      services_stats: [],
+      summary_stats: [],
     }
   },
   beforeCreate () {
@@ -82,39 +124,40 @@ export default {
     console.log(AFRAME)
     var self = this
 
-    // stats
-    this.stats.push({
-      label: 'us-west-2',
-      value: '32',
-      stat_high: '1',
-      stat_medium: '2',
-      stat_low: '3',
-      stat_pass: '1'
+    var regions = ['us-west-2', 'us-east-2', 'ca-central-1', 'ap-south-1']
+    var services = ['IAM', 'RDS', 'EC2', 'Cloudformation']
+
+    regions.forEach(function(r){
+      var stats = {
+        stat_high: Number(Math.floor(Math.random()*64)),
+        stat_medium: Number(Math.floor(Math.random()*64)),
+        stat_low: Number(Math.floor(Math.random()*64)),
+        stat_pass: Number(Math.floor(Math.random()*64)),
+        label: r,
+        value: String(Math.floor(Math.random()*256))
+      }
+      self.region_stats.push(stats)
     })
-    this.stats.push({
-      label: 'us-west-1',
-      value: '100',
-      stat_high: '1',
-      stat_medium: '2',
-      stat_low: '3',
-      stat_pass: '1'
-    })
-    this.stats.push({
-      label: 'us-east-2',
-      value: '5',
-      stat_high: '1',
-      stat_medium: '2',
-      stat_low: '3',
-      stat_pass: '1'
+
+    services.forEach(function(r){
+      var stats = {
+        stat_high: Number(Math.floor(Math.random()*64)),
+        stat_medium: Number(Math.floor(Math.random()*64)),
+        stat_low: Number(Math.floor(Math.random()*64)),
+        stat_pass: Number(Math.floor(Math.random()*64)),
+        label: r,
+        value: String(Math.floor(Math.random()*256))
+      }
+      self.services_stats.push(stats)
     })
 
 
-    this.cubes.push(0)
-    this.cubes.push(0)
-    this.cubes.push(0)
-    setInterval(function(){
-      self.foo = Date.now()
-    },1000)
+    // this.cubes.push(0)
+    // this.cubes.push(0)
+    // this.cubes.push(0)
+    // setInterval(function(){
+    //   self.foo = Date.now()
+    // },1000)
     // k.object3D.children[0].children[0].material.materials[0].color.g
   },
   methods: {
