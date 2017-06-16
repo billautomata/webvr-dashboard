@@ -41,7 +41,8 @@
         </template>
       </a-entity>
 
-      <a-entity geometry='primitive: sphere; segmentsWidth: 32; segmentsHeight: 32; radius: 9;' position='0 0 -15' scale='1 1 1' rotation='30 0 0' material="src: url(/texture/earth.jpg); wireframe: false;">
+      <a-entity geometry='primitive: sphere; segmentsWidth: 32; segmentsHeight: 32; radius: 9;' position='0 0 -15' scale='1 1 1' rotation='30 0 0'
+      material="src: url(texture/earth.jpg); wireframe: false;">
         <a-animation attribute="rotation"
                      dur='100000'
                      fill="none"
@@ -57,18 +58,18 @@
       <a-sky color="#ECECEC"></a-sky>
 
       <a-assets>
-        <a-asset-item id="tree-obj" src="/obj/evident-shield.obj"></a-asset-item>
-        <a-asset-item id="tree-mtl" src="/obj/evident-shield.mtl"></a-asset-item>
-        <!-- <a-asset-item id="environment-obj" src="/obj/environment.obj"></a-asset-item> -->
-        <!-- <a-asset-item id="environment-mtl" src="/obj/environment.mtl"></a-asset-item> -->
-        <a-asset-item id="vr-environment-obj" src="/obj/vr-environment.obj"></a-asset-item>
-        <a-asset-item id="vr-environment-mtl" src="/obj/vr-environment.mtl"></a-asset-item>
+        <a-asset-item id="tree-obj" src="obj/evident-shield.obj"></a-asset-item>
+        <a-asset-item id="tree-mtl" src="obj/evident-shield.mtl"></a-asset-item>
+        <!-- <a-asset-item id="environment-obj" src="obj/environment.obj"></a-asset-item> -->
+        <!-- <a-asset-item id="environment-mtl" src="obj/environment.mtl"></a-asset-item> -->
+        <a-asset-item id="vr-environment-obj" src="obj/vr-environment.obj"></a-asset-item>
+        <a-asset-item id="vr-environment-mtl" src="obj/vr-environment.mtl"></a-asset-item>
 
-        <a-asset-item id="pyramid-obj" src="/obj/pyramid.obj"></a-asset-item>
-        <a-asset-item id="pyramid-mtl" src="/obj/pyramid.mtl"></a-asset-item>
+        <a-asset-item id="pyramid-obj" src="obj/pyramid.obj"></a-asset-item>
+        <a-asset-item id="pyramid-mtl" src="obj/pyramid.mtl"></a-asset-item>
 
-        <a-asset-item id="sphere-env-obj" src="/obj/spherenvironment.obj"></a-asset-item>
-        <a-asset-item id="sphere-env-mtl" src="/obj/spherenvironment.mtl"></a-asset-item>
+        <a-asset-item id="sphere-env-obj" src="obj/spherenvironment.obj"></a-asset-item>
+        <a-asset-item id="sphere-env-mtl" src="obj/spherenvironment.mtl"></a-asset-item>
       </a-assets>
       <a-entity id='shield' shadow="cast: true; receive: true" position="0 2 -4" scale='0 0 0' obj-model="obj: #tree-obj; mtl: #tree-mtl">
         <a-animation attribute="scale"
@@ -84,7 +85,7 @@
       <!-- <a-entity id='vr-environment' position="0 -2 0" obj-model="obj: #vr-environment-obj; mtl: #vr-environment-mtl;" shadow="cast: true; receive: true"></a-entity> -->
       <!-- <a-entity id='pyramid' position="0 -2.9 0" scale='2 2 2' obj-model="obj: #pyramid-obj;"  material="color: #3366ff; metalness: 0; roughness: 1" shadow="cast: true; receive: true"></a-entity> -->
 
-       <a-entity cubemap="folder: /texture/cubemap/"></a-entity>
+       <a-entity cubemap="folder: texture/cubemap/"></a-entity>
 
       <!-- <a-entity id='sphere-env' position="0 8 0" obj-model="obj: #sphere-env-obj; mtl: #sphere-env-mtl;"></a-entity> -->
       <!-- <a-entity id='shield' position="0 2 -3" obj-model="obj: #tree-obj;" material="color: #3366ff; roughness: 1; metalness: 0"></a-entity> -->
