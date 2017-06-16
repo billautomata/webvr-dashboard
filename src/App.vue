@@ -7,7 +7,7 @@
 
       <a-entity position='0 1.5 -3'>
         <template v-for="(stat,index) in stats">
-          <a-entity :rotation="[0, index * -5, 0].join(' ')" :position="[index*1.1, 0, 0].join(' ')">
+          <a-entity :rotation="[0, 0, 0].join(' ')" :position="[index*1.1, 0, 0].join(' ')">
             <stat v-bind:label='stat.label'
               v-bind:value='stat.value'
               v-bind:stat_high='2'
@@ -27,29 +27,36 @@
       <a-assets>
         <a-asset-item id="tree-obj" src="/obj/evident-shield.obj"></a-asset-item>
         <a-asset-item id="tree-mtl" src="/obj/evident-shield.mtl"></a-asset-item>
-        <a-asset-item id="environment-obj" src="/obj/environment.obj"></a-asset-item>
-        <a-asset-item id="environment-mtl" src="/obj/environment.mtl"></a-asset-item>
+        <!-- <a-asset-item id="environment-obj" src="/obj/environment.obj"></a-asset-item> -->
+        <!-- <a-asset-item id="environment-mtl" src="/obj/environment.mtl"></a-asset-item> -->
         <a-asset-item id="vr-environment-obj" src="/obj/vr-environment.obj"></a-asset-item>
         <a-asset-item id="vr-environment-mtl" src="/obj/vr-environment.mtl"></a-asset-item>
 
         <a-asset-item id="pyramid-obj" src="/obj/pyramid.obj"></a-asset-item>
         <a-asset-item id="pyramid-mtl" src="/obj/pyramid.mtl"></a-asset-item>
+
+        <a-asset-item id="sphere-env-obj" src="/obj/spherenvironment.obj"></a-asset-item>
+        <a-asset-item id="sphere-env-mtl" src="/obj/spherenvironment.mtl"></a-asset-item>
       </a-assets>
-      <a-entity id='shield' shadow="cast: true; receive: true" position="0 2 -4" obj-model="obj: #tree-obj; mtl: #tree-mtl"></a-entity>
+      <a-entity id='shield' shadow="cast: true; receive: true" position="-2 2 -4" obj-model="obj: #tree-obj; mtl: #tree-mtl"></a-entity>
       <!-- <a-entity id='shield' position="0 2 -8" obj-model="obj: #tree-obj; mtl: #tree-mtl"></a-entity> -->
-      <!-- <a-entity id='environment' position="0 -2 0" obj-model="obj: #environment-obj;" material="color: #333; metalness: 0.4; roughness: 1" shadow="cast: true; receive: true"></a-entity> -->
-      <a-entity id='vr-environment' position="0 -2 0" obj-model="obj: #vr-environment-obj; mtl: #vr-environment-mtl;" material="color: #333; metalness: 0.4; roughness: 1" shadow="cast: true; receive: true"></a-entity>
-      <a-entity id='pyramid' position="0 -2.9 0" scale='2 2 2' obj-model="obj: #pyramid-obj;"  material="color: #3366ff; metalness: 0; roughness: 1" shadow="cast: true; receive: true"></a-entity>
+
+      <!-- <a-entity id='vr-environment' position="0 -2 0" obj-model="obj: #vr-environment-obj; mtl: #vr-environment-mtl;" shadow="cast: true; receive: true"></a-entity> -->
+      <!-- <a-entity id='pyramid' position="0 -2.9 0" scale='2 2 2' obj-model="obj: #pyramid-obj;"  material="color: #3366ff; metalness: 0; roughness: 1" shadow="cast: true; receive: true"></a-entity> -->
+
+       <a-entity cubemap="folder: /texture/cubemap/"></a-entity>
+
+      <!-- <a-entity id='sphere-env' position="0 8 0" obj-model="obj: #sphere-env-obj; mtl: #sphere-env-mtl;"></a-entity> -->
       <!-- <a-entity id='shield' position="0 2 -3" obj-model="obj: #tree-obj;" material="color: #3366ff; roughness: 1; metalness: 0"></a-entity> -->
       <!-- <a-entity id='shield' position="0 2 -3" obj-model="obj: #tree-obj;" material="shader: custom-material"></a-entity> -->
       <!-- <a-ocean color='purple' depth="100" width="100"></a-ocean> -->
       <a-light type="ambient" color="#ccc"></a-light>
-      <a-light position='0.5 1 0.4' color="#333" distance="20" intensity="4" type="directional"></a-light>
+      <!-- <a-light position='0.5 1 0.4' color="#333" distance="20" intensity="4" type="directional"></a-light> -->
       <!-- <a-entity light="castShadow: true; color: #FAFAFA; intensity: 1.0; shadowBias: 0.01
                        shadowCameraNear: 1; shadowCameraBias: 0.01;
                        type: directional; shadowMapWidth: 1024; shadowMapHeight: 1024"
                 position="0.5 0.8 0"></a-entity> -->
-      <!-- <a-light color="#ddf" position="3 0 5" distance="50" intensity="1" type="point" castShadow='true'></a-light> -->
+      <a-light color="#ddf" position="0 20 0" distance="50" intensity="1" type="point" castShadow='true'></a-light>
     </a-scene>
   </div>
 </template>

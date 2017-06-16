@@ -1,7 +1,7 @@
 <template>
   <a-entity id='stat'>
-    <a-text font='roboto' align='center' scale='0.5 0.5 0.5' position='0 0 0' color='#000000' :value="label"></a-text>
-    <a-text font='roboto' align='center' scale='2 2 0' position='0 0.25 0' color='#000000' :value="value"></a-text>
+    <a-text font='roboto' align='center' scale='0.5 0.5 0.5' position='0 0 0' color='#ffffff' :value="label"></a-text>
+    <a-text font='roboto' align='center' scale='2 2 0' position='0 0.25 0' color='#ffffff' :value="value"></a-text>
     <!-- <a-entity id='foo' geometry="primitive: box" material="color: red"></a-entity> -->
     <a-entity position='-0.25 -0.25 0' scale='1 0.2 0.2'>
       <a-box shadow geometry="primitive: box" :width='widths[0]' :position="[box_offsets[0], 0, 0].join(' ')" material="color: red; wireframe: false"></a-box>
