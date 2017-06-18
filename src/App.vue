@@ -1,13 +1,14 @@
 <template>
   <div id="app">
-    <a-scene>
+    <a-scene >
+
       <!-- <template v-for='(cube,index) in cubes'>
         <a-box :position="pos(index)" rotation="0 45 0" color="#4CC3D9"></a-box>
       </template> -->
 
       <a-entity position='1.7 1.5 -4'>
         <template v-for="(stat,index) in region_stats">
-          <a-entity :rotation="[0, 0, 0].join(' ')" :position="[index*1.1, 0, 0].join(' ')"  scale='0 0 0'>
+          <a-entity :rotation="[0, 0, 0].join(' ')" :position="grid_pos(index)"  scale='0 0 0'>
             <stat v-bind:label='stat.label'
               v-bind:value='stat.value'
               v-bind:stat_high='stat.stat_high'
@@ -25,7 +26,7 @@
 
       <a-entity position='-5 1.5 -4'>
         <template v-for="(stat,index) in services_stats">
-          <a-entity :rotation="[0, 0, 0].join(' ')" :position="[index*1.1, 0, 0].join(' ')" scale='0 0 0'>
+          <a-entity :rotation="[0, 0, 0].join(' ')" :position="grid_pos(index)" scale='0 0 0'>
             <stat v-bind:label='stat.label'
               v-bind:value='stat.value'
               v-bind:stat_high='stat.stat_high'
@@ -50,11 +51,6 @@
                      repeat="indefinite"
                      easing='linear'></a-animation>
       </a-entity>
-
-      <!-- <a-sphere position="0 1.25 -5" radius="1.25" color="#EF2D5E"></a-sphere>
-      <a-cylinder position="1 0.75 -3" radius="0.5" height="1.5" color="#FFC65D"></a-cylinder>
-      <a-plane position="0 0 -4" rotation="-90 0 0" width="4" height="4" color="#7BC8A4"></a-plane>
-      <a-text position='0 2 -3' color='#000000' :value="foo"></a-text> -->
       <a-sky color="#ECECEC"></a-sky>
 
       <a-assets>
@@ -71,32 +67,49 @@
         <a-asset-item id="sphere-env-obj" src="obj/spherenvironment.obj"></a-asset-item>
         <a-asset-item id="sphere-env-mtl" src="obj/spherenvironment.mtl"></a-asset-item>
       </a-assets>
-      <a-entity id='shield' shadow="cast: true; receive: true" position="0 2 -4" scale='0 0 0' obj-model="obj: #tree-obj; mtl: #tree-mtl">
+      <a-entity id='shield' shadow="cast: true; receive: true" rotatation='0 0 0' position="0 2 -5" scale='0 0 0' obj-model="obj: #tree-obj; mtl: #tree-mtl">
         <a-animation attribute="scale"
                      dur='1000'
                      fill="forwards"
                      to="1 1 1"
                      repeat="0"
-                     easing='ease-out'></a-animation>
+                     easing='ease-out-bounce'></a-animation>
+         <a-animation attribute="rotation"
+                      dur='1000'
+                      fill="forwards"
+                      easing='ease-out-bounce'
+                      to="360 0 0"
+                      delay="4000"
+                      repeat="indefinite"></a-animation>
+          <a-animation attribute="rotation"
+                       dur='700'
+                       fill="forwards"
+                       easing='ease-out-bounce'
+                       from='360 0 0'
+                       to="360 360 0"
+                       delay="10000"
+                       repeat="indefinite"></a-animation>
       </a-entity>
-
+      <a-entity cubemap="folder: texture/cubemap/"></a-entity>  
       <!-- <a-entity id='shield' position="0 2 -8" obj-model="obj: #tree-obj; mtl: #tree-mtl"></a-entity> -->
 
       <!-- <a-entity id='vr-environment' position="0 -2 0" obj-model="obj: #vr-environment-obj; mtl: #vr-environment-mtl;" shadow="cast: true; receive: true"></a-entity> -->
       <!-- <a-entity id='pyramid' position="0 -2.9 0" scale='2 2 2' obj-model="obj: #pyramid-obj;"  material="color: #3366ff; metalness: 0; roughness: 1" shadow="cast: true; receive: true"></a-entity> -->
 
-       <a-entity cubemap="folder: texture/cubemap/"></a-entity>
+
 
       <!-- <a-entity id='sphere-env' position="0 8 0" obj-model="obj: #sphere-env-obj; mtl: #sphere-env-mtl;"></a-entity> -->
       <!-- <a-entity id='shield' position="0 2 -3" obj-model="obj: #tree-obj;" material="color: #3366ff; roughness: 1; metalness: 0"></a-entity> -->
       <!-- <a-entity id='shield' position="0 2 -3" obj-model="obj: #tree-obj;" material="shader: custom-material"></a-entity> -->
       <!-- <a-ocean color='purple' depth="100" width="100"></a-ocean> -->
-      <a-light type="ambient" color="#ccc"></a-light>
+
       <!-- <a-light position='0.5 1 0.4' color="#333" distance="20" intensity="4" type="directional"></a-light> -->
       <!-- <a-entity light="castShadow: true; color: #FAFAFA; intensity: 1.0; shadowBias: 0.01
                        shadowCameraNear: 1; shadowCameraBias: 0.01;
                        type: directional; shadowMapWidth: 1024; shadowMapHeight: 1024"
                 position="0.5 0.8 0"></a-entity> -->
+
+      <a-light type="ambient" color="#ccc"></a-light>
       <a-light color="#ddf" position="0 20 0" distance="50" intensity="1" type="point" castShadow='true'></a-light>
     </a-scene>
   </div>
@@ -125,8 +138,9 @@ export default {
     console.log(AFRAME)
     var self = this
 
-    var regions = ['us-west-2', 'us-east-2', 'ca-central-1', 'ap-south-1']
-    var services = ['IAM', 'RDS', 'EC2', 'Cloudformation']
+    var regions = ['us-west-2', 'us-east-2', 'ca-central-1', 'ap-south-1', 'global', 'eu-west-1', 'ap-northeast-1', 'ap-northeast-2']
+    var services = ['IAM', 'RDS', 'EC2', 'Cloudformation', 'S3']
+    var statuses = ['risks identified', 'high', 'medium', 'low', 'pass']
 
     regions.forEach(function(r){
       var stats = {
@@ -152,19 +166,29 @@ export default {
       self.services_stats.push(stats)
     })
 
+    statuses.forEach(function(r){
+      var stats = {
+        label: r,
+        value: String(Math.floor(Math.random()*256))
+      }
+      self.summary_stats.push(stats)
+    })
 
-    // this.cubes.push(0)
-    // this.cubes.push(0)
-    // this.cubes.push(0)
-    // setInterval(function(){
-    //   self.foo = Date.now()
-    // },1000)
     // k.object3D.children[0].children[0].material.materials[0].color.g
   },
   methods: {
     pos: function(index){
       // console.log('pos', index)
       return [index * -1.5, 0.5, -3].join(' ')
+    },
+    grid_pos: function(index){
+      var grid_width = 4
+      var space_multi = 1.1
+      console.log('pos', index)
+      var x = index % grid_width
+      var y = Math.floor(index / grid_width)
+
+      return [ x * space_multi, y * space_multi, 0 ].join(' ')
     }
   }
 }
