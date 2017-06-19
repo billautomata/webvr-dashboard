@@ -2,6 +2,26 @@
   <div id="app">
     <a-scene >
 
+      <a-assets>
+        <a-asset-item id="tree-obj" src="obj/evident-shield.obj"></a-asset-item>
+        <a-asset-item id="tree-mtl" src="obj/evident-shield.mtl"></a-asset-item>
+
+        <a-asset-item id="esp-vr-satellite-mtl" src="obj/esp-vr-asset-satellite.mtl"></a-asset-item>
+        <a-asset-item id="esp-vr-satellite-obj" src="obj/esp-vr-asset-satellite.obj"></a-asset-item>
+
+        <a-asset-item id="vr-sat-json" src="obj/esp-vr-asset-satellite.json"></a-asset-item>
+        <!-- <a-asset-item id="environment-obj" src="obj/environment.obj"></a-asset-item> -->
+        <!-- <a-asset-item id="environment-mtl" src="obj/environment.mtl"></a-asset-item> -->
+        <a-asset-item id="vr-environment-obj" src="obj/vr-environment.obj"></a-asset-item>
+        <a-asset-item id="vr-environment-mtl" src="obj/vr-environment.mtl"></a-asset-item>
+
+        <a-asset-item id="pyramid-obj" src="obj/pyramid.obj"></a-asset-item>
+        <a-asset-item id="pyramid-mtl" src="obj/pyramid.mtl"></a-asset-item>
+
+        <a-asset-item id="sphere-env-obj" src="obj/spherenvironment.obj"></a-asset-item>
+        <a-asset-item id="sphere-env-mtl" src="obj/spherenvironment.mtl"></a-asset-item>
+      </a-assets>
+
       <!-- <template v-for='(cube,index) in cubes'>
         <a-box :position="pos(index)" rotation="0 45 0" color="#4CC3D9"></a-box>
       </template> -->
@@ -51,46 +71,52 @@
                      repeat="indefinite"
                      easing='linear'></a-animation>
       </a-entity>
+
       <a-sky color="#ECECEC"></a-sky>
 
-      <a-assets>
-        <a-asset-item id="tree-obj" src="obj/evident-shield.obj"></a-asset-item>
-        <a-asset-item id="tree-mtl" src="obj/evident-shield.mtl"></a-asset-item>
-        <!-- <a-asset-item id="environment-obj" src="obj/environment.obj"></a-asset-item> -->
-        <!-- <a-asset-item id="environment-mtl" src="obj/environment.mtl"></a-asset-item> -->
-        <a-asset-item id="vr-environment-obj" src="obj/vr-environment.obj"></a-asset-item>
-        <a-asset-item id="vr-environment-mtl" src="obj/vr-environment.mtl"></a-asset-item>
 
-        <a-asset-item id="pyramid-obj" src="obj/pyramid.obj"></a-asset-item>
-        <a-asset-item id="pyramid-mtl" src="obj/pyramid.mtl"></a-asset-item>
+      <a-entity rotatation='0 0 0' position="0 0 -15">
+        <a-entity id='sat' shadow="cast: true; receive: true" position='0 0 11'>
+          <!-- <a-entity scale='0.1 0.1 0.1' rotation='-90 0 0' obj-model="obj: #esp-vr-satellite-obj; mtl: #esp-vr-satellite-mtl"> -->
+          <a-entity scale='0.1 0.1 0.1' rotation='-90 0 0' json-model="src: url(./obj/esp-vr-asset-satellite.json);">
+          </a-entity>
+        </a-entity>
+        <a-animation attribute="rotation"
+                     dur='5000'
+                     fill="none"
+                     to="0 360 0"
+                     repeat="indefinite"
+                     easing='linear'></a-animation>
+      </a-entity>
 
-        <a-asset-item id="sphere-env-obj" src="obj/spherenvironment.obj"></a-asset-item>
-        <a-asset-item id="sphere-env-mtl" src="obj/spherenvironment.mtl"></a-asset-item>
-      </a-assets>
+
       <a-entity id='shield' shadow="cast: true; receive: true" rotatation='0 0 0' position="0 2 -5" scale='0 0 0' obj-model="obj: #tree-obj; mtl: #tree-mtl">
         <a-animation attribute="scale"
                      dur='1000'
                      fill="forwards"
                      to="1 1 1"
                      repeat="0"
-                     easing='ease-out-bounce'></a-animation>
-         <a-animation attribute="rotation"
-                      dur='1000'
-                      fill="forwards"
-                      easing='ease-out-bounce'
-                      to="360 0 0"
-                      delay="4000"
-                      repeat="indefinite"></a-animation>
-          <a-animation attribute="rotation"
-                       dur='700'
-                       fill="forwards"
-                       easing='ease-out-bounce'
-                       from='360 0 0'
-                       to="360 360 0"
-                       delay="10000"
-                       repeat="indefinite"></a-animation>
+                     easing='ease-out-bounce'>
+        </a-animation>
+        <a-animation attribute="rotation"
+                    dur='1000'
+                    fill="forwards"
+                    easing='ease-out-bounce'
+                    to="360 0 0"
+                    delay="4000"
+                    repeat="indefinite">
+        </a-animation>
+        <a-animation attribute="rotation"
+                     dur='700'
+                     fill="forwards"
+                     easing='ease-out-bounce'
+                     from='360 0 0'
+                     to="360 360 0"
+                     delay="10000"
+                     repeat="indefinite">
+        </a-animation>
       </a-entity>
-      <a-entity cubemap="folder: texture/cubemap/"></a-entity>  
+      <a-entity cubemap="folder: texture/cubemap/"></a-entity>
       <!-- <a-entity id='shield' position="0 2 -8" obj-model="obj: #tree-obj; mtl: #tree-mtl"></a-entity> -->
 
       <!-- <a-entity id='vr-environment' position="0 -2 0" obj-model="obj: #vr-environment-obj; mtl: #vr-environment-mtl;" shadow="cast: true; receive: true"></a-entity> -->
