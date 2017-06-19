@@ -89,6 +89,21 @@
                      easing='linear'></a-animation>
       </a-entity>
 
+      <a-entity rotation='0 0 32'>
+        <a-entity rotatation='0 0 0' position="0 0 -15">
+          <a-entity id='sat' shadow="cast: true; receive: true" position='0 0 10'>
+            <!-- <a-entity scale='0.1 0.1 0.1' rotation='-90 0 0' obj-model="obj: #esp-vr-satellite-obj; mtl: #esp-vr-satellite-mtl"> -->
+            <a-entity scale='0.1 0.1 0.1' rotation='-90 0 0' json-model="src: url(./obj/esp-vr-asset-satellite.json);">
+            </a-entity>
+          </a-entity>
+          <a-animation attribute="rotation"
+                       dur='6000'
+                       fill="none"
+                       to="360 0 0"
+                       repeat="indefinite"
+                       easing='linear'></a-animation>
+        </a-entity>
+      </a-entity>
 
       <a-entity id='shield' shadow="cast: true; receive: true" rotatation='0 0 0' position="0 2 -5" scale='0 0 0' obj-model="obj: #tree-obj; mtl: #tree-mtl">
         <a-animation attribute="scale"
