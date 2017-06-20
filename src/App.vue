@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <a-scene effects="bloom, fxaa, godrays" bloom="radius: 0.66" fxaa godrays>
+    <a-scene effects="bloom, fxaa" bloom="radius: 0.66" fxaa>
 
       <a-assets>
         <a-asset-item id="tree-obj" src="obj/evident-shield.obj"></a-asset-item>
@@ -74,35 +74,31 @@
 
       <a-sky color="#ECECEC"></a-sky>
 
-
-      <a-entity rotatation='0 0 0' position="0 0 -15">
-        <a-entity id='sat' shadow="cast: true; receive: true" position='0 0 11'>
-          <!-- <a-entity scale='0.1 0.1 0.1' rotation='-90 0 0' obj-model="obj: #esp-vr-satellite-obj; mtl: #esp-vr-satellite-mtl"> -->
-          <a-entity scale='0.1 0.1 0.1' rotation='-90 0 0' json-model="src: url(./obj/esp-vr-asset-satellite.json);">
-          </a-entity>
-        </a-entity>
-        <a-animation attribute="rotation"
-                     dur='5000'
-                     fill="none"
-                     to="0 360 0"
-                     repeat="indefinite"
-                     easing='linear'></a-animation>
-      </a-entity>
-
-      <a-entity rotation='0 0 32'>
-        <a-entity rotatation='0 0 0' position="0 0 -15">
-          <a-entity id='sat' shadow="cast: true; receive: true" position='0 0 10'>
-            <!-- <a-entity scale='0.1 0.1 0.1' rotation='-90 0 0' obj-model="obj: #esp-vr-satellite-obj; mtl: #esp-vr-satellite-mtl"> -->
-            <a-entity scale='0.1 0.1 0.1' rotation='-90 0 0' json-model="src: url(./obj/esp-vr-asset-satellite.json);">
+      <a-entity>
+        <template v-for='(sat,index) in sats' v-bind:sat='sat'>
+          <a-entity :rotation="[0, 0, sat.rot].join(' ')">
+            <a-entity rotatation='0 0 0' position="0 0 -15">
+              <a-entity id='sat' shadow="cast: true; receive: true" :position="[0, 0, sat.distance].join(' ')">
+                <a-entity scale='0.1 0.1 0.1' rotation='-90 0 0' json-model="src: url(./obj/esp-vr-asset-satellite.json);"></a-entity>
+                <a-entity rotation='0 0 0'>
+                  <a-entity scale='0.1 0.1 0.1' rotation='-90 0 0' json-model="src: url(./obj/sat-beam.json);"></a-entity>
+                  <a-animation attribute="rotation"
+                               dur='2000'
+                               fill="none"
+                               to="0 0 360"
+                               repeat="indefinite"
+                               easing='linear'></a-animation>
+                </a-entity>
+              </a-entity>
+              <a-animation attribute="rotation"
+                           :dur='sat.speed'
+                           fill="none"
+                           to="0 360 0"
+                           repeat="indefinite"
+                           easing='linear'></a-animation>
             </a-entity>
           </a-entity>
-          <a-animation attribute="rotation"
-                       dur='6000'
-                       fill="none"
-                       to="360 0 0"
-                       repeat="indefinite"
-                       easing='linear'></a-animation>
-        </a-entity>
+        </template>
       </a-entity>
 
       <a-entity id='shield' shadow="cast: true; receive: true" rotatation='0 0 0' position="0 2 -5" scale='0 0 0' obj-model="obj: #tree-obj; mtl: #tree-mtl">
@@ -171,11 +167,34 @@ export default {
       region_stats: [],
       services_stats: [],
       summary_stats: [],
+      sats: []
     }
   },
   beforeCreate () {
   },
   mounted () {
+
+    this.sats.push({
+      rot: 0,
+      distance: 10,
+      speed: 4300
+    })
+    this.sats.push({
+      rot: 45,
+      distance: 12,
+      speed: 10000
+    })
+    this.sats.push({
+      rot: 90,
+      distance: 13,
+      speed: 5800
+    })
+    this.sats.push({
+      rot: 120,
+      distance: 14,
+      speed: 8000
+    })
+
     console.log(AFRAME)
     var self = this
 
