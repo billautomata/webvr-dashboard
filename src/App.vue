@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <a-scene >
+    <a-scene effects="bloom, fxaa, godrays" bloom="radius: 0.66" fxaa godrays>
 
       <a-assets>
         <a-asset-item id="tree-obj" src="obj/evident-shield.obj"></a-asset-item>
@@ -150,8 +150,8 @@
                        type: directional; shadowMapWidth: 1024; shadowMapHeight: 1024"
                 position="0.5 0.8 0"></a-entity> -->
 
-      <a-light type="ambient" color="#ccc"></a-light>
-      <a-light color="#ddf" position="0 20 0" distance="50" intensity="1" type="point" castShadow='true'></a-light>
+      <!-- <a-light type="ambient" color="#ccc"></a-light> -->
+      <a-light color="#ddf" position="0 20 5" distance="50" intensity="1" type="point" castShadow='true'></a-light>
     </a-scene>
   </div>
 </template>
